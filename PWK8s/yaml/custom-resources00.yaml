@@ -1,5 +1,13 @@
 # This section includes base Calico installation configuration.
 # For more information, see: https://projectcalico.docs.tigera.io/v3.22/reference/installation/api#operator.tigera.io/v1.Installation
+
+# My Notes:
+# Build Kubernetes bare-metal cluster with external access:
+# https://www.datapacket.com/blog/build-kubernetes-cluster#chapter4
+# >>
+# Calico
+# https://docs.projectcalico.org/manifests/custom-resources.yaml
+
 apiVersion: operator.tigera.io/v1
 kind: Installation
 metadata:
