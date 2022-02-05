@@ -14,6 +14,13 @@
 ## While it's possible to set up toleration for specific pods, 
 ## let's just remove the taint all together now.
 ##
+## https://raw.githubusercontent.com/a13dd1236/cpRepository/main/PWK8s/yaml/custom-resources01.yaml
+
+## kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+## wget https://docs.projectcalico.org/manifests/custom-resources.yaml
+## To:
+## kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+## kubectl create -f https://raw.githubusercontent.com/a13dd1236/cpRepository/main/PWK8s/yaml/custom-resources01.yaml
 apiVersion: operator.tigera.io/v1
 kind: Installation
 metadata:
