@@ -1,0 +1,48 @@
+# This section includes base Calico installation configuration.
+# For more information, see: https://projectcalico.docs.tigera.io/v3.22/reference/installation/api#operator.tigera.io/v1.Installation
+
+# My Notes:
+# Build Kubernetes bare-metal cluster with external access:
+# https://www.datapacket.com/blog/build-kubernetes-cluster#chapter4
+# >>
+# Calico
+# https://docs.projectcalico.org/manifests/custom-resources.yaml
+
+## Change cidr field in custom-resource.yaml to match your pod network CIDR. 
+## Moreover, master nodes are by default tainted, 
+## which means that they can't run pods. 
+## While it's possible to set up toleration for specific pods, 
+## let's just remove the taint all together now.
+##
+## https://raw.githubusercontent.com/a13dd1236/cpRepository/main/PWK8s/yaml/custom-resources01.yaml
+
+## kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+## wget https://docs.projectcalico.org/manifests/custom-resources.yaml
+## To:
+## kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+## kubectl create -f https://raw.githubusercontent.com/a13dd1236/cpRepository/main/PWK8s/yaml/custom-resources01.yaml
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+  # Configures Calico networking.
+  calicoNetwork:
+    # Note: The ipPools section cannot be modified post-install.
+    ipPools:
+    - blockSize: 26
+      cidr: 192.168.2.0/24
+      encapsulation: VXLANCrossSubnet
+      natOutgoing: Enabled
+      nodeSelector: all()
+
+---
+
+# This section configures the Calico API server.
+# For more information, see: https://projectcalico.docs.tigera.io/v3.22/reference/installation/api#operator.tigera.io/v1.APIServer
+apiVersion: operator.tigera.io/v1
+kind: APIServer 
+metadata: 
+  name: default 
+spec: {}
+
